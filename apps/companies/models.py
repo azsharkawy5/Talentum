@@ -114,3 +114,57 @@ class Project(models.Model):
 
         if self.start_date and self.end_date and self.start_date > self.end_date:
             raise ValidationError("End date must be after start date")
+
+
+class PerformanceReview(models.Model):
+    STAGE_CHOICES = [
+        ("pending_review", "Pending Review"),
+        ("review_scheduled", "Review Scheduled"),
+        ("feedback_provided", "Feedback Provided"),
+        ("under_approval", "Under Approval"),
+        ("review_approved", "Review Approved"),
+        ("review_rejected", "Review Rejected"),
+    ]
+
+    employee = models.ForeignKey(
+        Employee, on_delete=models.CASCADE, related_name="performance_reviews"
+    )
+    reviewer = models.ForeignKey(
+        Employee,
+        on_delete=models.CASCADE,
+        related_name="reviews_conducted",
+        null=True,
+        blank=True,
+    )
+    stage = models.CharField(
+        max_length=20, choices=STAGE_CHOICES, default="pending_review"
+    )
+    review_date = models.DateField(null=True, blank=True)
+    feedback = models.TextField(blank=True)
+    rating = models.IntegerField(
+        validators=[MinValueValidator(1)],
+        null=True,
+        blank=True,
+        help_text="Rating from 1-5",
+    )
+    notes = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"Performance Review - {self.employee.name} ({self.get_stage_display()})"
+
+    def can_transition_to(self, new_stage):
+        """Check if transition to new stage is allowed"""
+        transitions = {
+            "pending_review": ["review_scheduled"],
+            "review_scheduled": ["feedback_provided"],
+            "feedback_provided": ["under_approval"],
+            "under_approval": ["review_approved", "review_rejected"],
+            "review_rejected": ["feedback_provided"],
+            "review_approved": [],
+        }
+        return new_stage in transitions.get(self.stage, [])
