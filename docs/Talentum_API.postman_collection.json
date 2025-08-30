@@ -1,0 +1,1011 @@
+{
+     "info": {
+          "_postman_id": "talentum-api-collection",
+          "name": "Talentum API",
+          "description": "Complete API collection for Talentum System including companies, departments, employees, projects, and performance reviews.",
+          "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+          "_exporter_id": "talentum-api"
+     },
+     "item": [
+          {
+               "name": "Companies",
+               "item": [
+                    {
+                         "name": "List Companies",
+                         "request": {
+                              "method": "GET",
+                              "header": [
+                                   {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}",
+                                        "type": "text"
+                                   }
+                              ],
+                              "url": {
+                                   "raw": "{{base_url}}/api/v1/companies/",
+                                   "host": [
+                                        "{{base_url}}"
+                                   ],
+                                   "path": [
+                                        "api",
+                                        "v1",
+                                        "companies",
+                                        ""
+                                   ]
+                              },
+                              "description": "Retrieve a list of all companies. All authenticated users can access this endpoint."
+                         },
+                         "response": []
+                    },
+                    {
+                         "name": "Get Company Details",
+                         "request": {
+                              "method": "GET",
+                              "header": [
+                                   {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}",
+                                        "type": "text"
+                                   }
+                              ],
+                              "url": {
+                                   "raw": "{{base_url}}/api/v1/companies/{{company_id}}/",
+                                   "host": [
+                                        "{{base_url}}"
+                                   ],
+                                   "path": [
+                                        "api",
+                                        "v1",
+                                        "companies",
+                                        "{{company_id}}",
+                                        ""
+                                   ]
+                              },
+                              "description": "Retrieve details of a specific company including auto-calculated counts."
+                         },
+                         "response": []
+                    }
+               ],
+               "description": "Company management endpoints. Companies are read-only for non-admin users."
+          },
+          {
+               "name": "Departments",
+               "item": [
+                    {
+                         "name": "List Departments",
+                         "request": {
+                              "method": "GET",
+                              "header": [
+                                   {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}",
+                                        "type": "text"
+                                   }
+                              ],
+                              "url": {
+                                   "raw": "{{base_url}}/api/v1/departments/",
+                                   "host": [
+                                        "{{base_url}}"
+                                   ],
+                                   "path": [
+                                        "api",
+                                        "v1",
+                                        "departments",
+                                        ""
+                                   ],
+                                   "query": [
+                                        {
+                                             "key": "company",
+                                             "value": "{{company_id}}",
+                                             "description": "Filter by company ID",
+                                             "disabled": true
+                                        },
+                                        {
+                                             "key": "search",
+                                             "value": "",
+                                             "description": "Search by department name",
+                                             "disabled": true
+                                        },
+                                        {
+                                             "key": "ordering",
+                                             "value": "name",
+                                             "description": "Order by: name, company__name, created_at",
+                                             "disabled": true
+                                        }
+                                   ]
+                              },
+                              "description": "Retrieve a list of departments. All authenticated users can access this endpoint."
+                         },
+                         "response": []
+                    },
+                    {
+                         "name": "Create Department",
+                         "request": {
+                              "method": "POST",
+                              "header": [
+                                   {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}",
+                                        "type": "text"
+                                   },
+                                   {
+                                        "key": "Content-Type",
+                                        "value": "application/json",
+                                        "type": "text"
+                                   }
+                              ],
+                              "body": {
+                                   "mode": "raw",
+                                   "raw": "{\n  \"company\": {{company_id}},\n  \"name\": \"Engineering Department\"\n}"
+                              },
+                              "url": {
+                                   "raw": "{{base_url}}/api/v1/departments/",
+                                   "host": [
+                                        "{{base_url}}"
+                                   ],
+                                   "path": [
+                                        "api",
+                                        "v1",
+                                        "departments",
+                                        ""
+                                   ]
+                              },
+                              "description": "Create a new department. Requires Admin or Manager role."
+                         },
+                         "response": []
+                    },
+                    {
+                         "name": "Get Department Details",
+                         "request": {
+                              "method": "GET",
+                              "header": [
+                                   {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}",
+                                        "type": "text"
+                                   }
+                              ],
+                              "url": {
+                                   "raw": "{{base_url}}/api/v1/departments/{{department_id}}/",
+                                   "host": [
+                                        "{{base_url}}"
+                                   ],
+                                   "path": [
+                                        "api",
+                                        "v1",
+                                        "departments",
+                                        "{{department_id}}",
+                                        ""
+                                   ]
+                              },
+                              "description": "Retrieve details of a specific department."
+                         },
+                         "response": []
+                    },
+                    {
+                         "name": "Update Department",
+                         "request": {
+                              "method": "PATCH",
+                              "header": [
+                                   {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}",
+                                        "type": "text"
+                                   },
+                                   {
+                                        "key": "Content-Type",
+                                        "value": "application/json",
+                                        "type": "text"
+                                   }
+                              ],
+                              "body": {
+                                   "mode": "raw",
+                                   "raw": "{\n  \"name\": \"Updated Department Name\"\n}"
+                              },
+                              "url": {
+                                   "raw": "{{base_url}}/api/v1/departments/{{department_id}}/",
+                                   "host": [
+                                        "{{base_url}}"
+                                   ],
+                                   "path": [
+                                        "api",
+                                        "v1",
+                                        "departments",
+                                        "{{department_id}}",
+                                        ""
+                                   ]
+                              },
+                              "description": "Update department information. Requires Admin or Manager role."
+                         },
+                         "response": []
+                    },
+                    {
+                         "name": "Delete Department",
+                         "request": {
+                              "method": "DELETE",
+                              "header": [
+                                   {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}",
+                                        "type": "text"
+                                   }
+                              ],
+                              "url": {
+                                   "raw": "{{base_url}}/api/v1/departments/{{department_id}}/",
+                                   "host": [
+                                        "{{base_url}}"
+                                   ],
+                                   "path": [
+                                        "api",
+                                        "v1",
+                                        "departments",
+                                        "{{department_id}}",
+                                        ""
+                                   ]
+                              },
+                              "description": "Delete a department. Requires Admin or Manager role."
+                         },
+                         "response": []
+                    }
+               ],
+               "description": "Department management endpoints. Admin and Manager users can create, update, and delete departments."
+          },
+          {
+               "name": "Employees",
+               "item": [
+                    {
+                         "name": "List Employees",
+                         "request": {
+                              "method": "GET",
+                              "header": [
+                                   {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}",
+                                        "type": "text"
+                                   }
+                              ],
+                              "url": {
+                                   "raw": "{{base_url}}/api/v1/employees/",
+                                   "host": [
+                                        "{{base_url}}"
+                                   ],
+                                   "path": [
+                                        "api",
+                                        "v1",
+                                        "employees",
+                                        ""
+                                   ],
+                                   "query": [
+                                        {
+                                             "key": "company",
+                                             "value": "{{company_id}}",
+                                             "description": "Filter by company ID",
+                                             "disabled": true
+                                        },
+                                        {
+                                             "key": "department",
+                                             "value": "{{department_id}}",
+                                             "description": "Filter by department ID",
+                                             "disabled": true
+                                        },
+                                        {
+                                             "key": "designation",
+                                             "value": "",
+                                             "description": "Filter by designation",
+                                             "disabled": true
+                                        },
+                                        {
+                                             "key": "search",
+                                             "value": "",
+                                             "description": "Search by name, email, designation",
+                                             "disabled": true
+                                        },
+                                        {
+                                             "key": "ordering",
+                                             "value": "name",
+                                             "description": "Order by: name, company__name, department__name, hired_on, created_at",
+                                             "disabled": true
+                                        }
+                                   ]
+                              },
+                              "description": "Retrieve a list of employees. All authenticated users can access this endpoint."
+                         },
+                         "response": []
+                    },
+                    {
+                         "name": "Create Employee",
+                         "request": {
+                              "method": "POST",
+                              "header": [
+                                   {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}",
+                                        "type": "text"
+                                   },
+                                   {
+                                        "key": "Content-Type",
+                                        "value": "application/json",
+                                        "type": "text"
+                                   }
+                              ],
+                              "body": {
+                                   "mode": "raw",
+                                   "raw": "{\n  \"company\": {{company_id}},\n  \"department\": {{department_id}},\n  \"user\": {{user_id}},\n  \"name\": \"John Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"mobile_number\": \"1234567890\",\n  \"address\": \"123 Main Street, City, State\",\n  \"designation\": \"Software Developer\",\n  \"hired_on\": \"2024-01-15\"\n}"
+                              },
+                              "url": {
+                                   "raw": "{{base_url}}/api/v1/employees/",
+                                   "host": [
+                                        "{{base_url}}"
+                                   ],
+                                   "path": [
+                                        "api",
+                                        "v1",
+                                        "employees",
+                                        ""
+                                   ]
+                              },
+                              "description": "Create a new employee. Requires Admin or Manager role."
+                         },
+                         "response": []
+                    },
+                    {
+                         "name": "Get Employee Details",
+                         "request": {
+                              "method": "GET",
+                              "header": [
+                                   {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}",
+                                        "type": "text"
+                                   }
+                              ],
+                              "url": {
+                                   "raw": "{{base_url}}/api/v1/employees/{{employee_id}}/",
+                                   "host": [
+                                        "{{base_url}}"
+                                   ],
+                                   "path": [
+                                        "api",
+                                        "v1",
+                                        "employees",
+                                        "{{employee_id}}",
+                                        ""
+                                   ]
+                              },
+                              "description": "Retrieve details of a specific employee."
+                         },
+                         "response": []
+                    },
+                    {
+                         "name": "Update Employee",
+                         "request": {
+                              "method": "PATCH",
+                              "header": [
+                                   {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}",
+                                        "type": "text"
+                                   },
+                                   {
+                                        "key": "Content-Type",
+                                        "value": "application/json",
+                                        "type": "text"
+                                   }
+                              ],
+                              "body": {
+                                   "mode": "raw",
+                                   "raw": "{\n  \"designation\": \"Senior Software Developer\",\n  \"mobile_number\": \"0987654321\"\n}"
+                              },
+                              "url": {
+                                   "raw": "{{base_url}}/api/v1/employees/{{employee_id}}/",
+                                   "host": [
+                                        "{{base_url}}"
+                                   ],
+                                   "path": [
+                                        "api",
+                                        "v1",
+                                        "employees",
+                                        "{{employee_id}}",
+                                        ""
+                                   ]
+                              },
+                              "description": "Update employee information. Requires Admin, Manager, or Employee (own profile)."
+                         },
+                         "response": []
+                    },
+                    {
+                         "name": "Delete Employee",
+                         "request": {
+                              "method": "DELETE",
+                              "header": [
+                                   {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}",
+                                        "type": "text"
+                                   }
+                              ],
+                              "url": {
+                                   "raw": "{{base_url}}/api/v1/employees/{{employee_id}}/",
+                                   "host": [
+                                        "{{base_url}}"
+                                   ],
+                                   "path": [
+                                        "api",
+                                        "v1",
+                                        "employees",
+                                        "{{employee_id}}",
+                                        ""
+                                   ]
+                              },
+                              "description": "Delete an employee. Requires Admin or Manager role."
+                         },
+                         "response": []
+                    },
+                    {
+                         "name": "Get Employee Profile",
+                         "request": {
+                              "method": "GET",
+                              "header": [
+                                   {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}",
+                                        "type": "text"
+                                   }
+                              ],
+                              "url": {
+                                   "raw": "{{base_url}}/api/v1/employees/profile/",
+                                   "host": [
+                                        "{{base_url}}"
+                                   ],
+                                   "path": [
+                                        "api",
+                                        "v1",
+                                        "employees",
+                                        "profile",
+                                        ""
+                                   ]
+                              },
+                              "description": "Get current user's employee profile. All authenticated users can access this endpoint."
+                         },
+                         "response": []
+                    }
+               ],
+               "description": "Employee management endpoints. Admin and Manager users can manage employees, while employees can update their own profiles."
+          },
+          {
+               "name": "Projects",
+               "item": [
+                    {
+                         "name": "List Projects",
+                         "request": {
+                              "method": "GET",
+                              "header": [
+                                   {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}",
+                                        "type": "text"
+                                   }
+                              ],
+                              "url": {
+                                   "raw": "{{base_url}}/api/v1/projects/",
+                                   "host": [
+                                        "{{base_url}}"
+                                   ],
+                                   "path": [
+                                        "api",
+                                        "v1",
+                                        "projects",
+                                        ""
+                                   ],
+                                   "query": [
+                                        {
+                                             "key": "company",
+                                             "value": "{{company_id}}",
+                                             "description": "Filter by company ID",
+                                             "disabled": true
+                                        },
+                                        {
+                                             "key": "department",
+                                             "value": "{{department_id}}",
+                                             "description": "Filter by department ID",
+                                             "disabled": true
+                                        },
+                                        {
+                                             "key": "start_date",
+                                             "value": "",
+                                             "description": "Filter by start date (YYYY-MM-DD)",
+                                             "disabled": true
+                                        },
+                                        {
+                                             "key": "end_date",
+                                             "value": "",
+                                             "description": "Filter by end date (YYYY-MM-DD)",
+                                             "disabled": true
+                                        },
+                                        {
+                                             "key": "search",
+                                             "value": "",
+                                             "description": "Search by name, description",
+                                             "disabled": true
+                                        },
+                                        {
+                                             "key": "ordering",
+                                             "value": "start_date",
+                                             "description": "Order by: name, start_date, end_date, company__name, department__name",
+                                             "disabled": true
+                                        }
+                                   ]
+                              },
+                              "description": "Retrieve a list of projects. All authenticated users can access this endpoint."
+                         },
+                         "response": []
+                    },
+                    {
+                         "name": "Create Project",
+                         "request": {
+                              "method": "POST",
+                              "header": [
+                                   {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}",
+                                        "type": "text"
+                                   },
+                                   {
+                                        "key": "Content-Type",
+                                        "value": "application/json",
+                                        "type": "text"
+                                   }
+                              ],
+                              "body": {
+                                   "mode": "raw",
+                                   "raw": "{\n  \"company\": {{company_id}},\n  \"department\": {{department_id}},\n  \"name\": \"Website Redesign Project\",\n  \"description\": \"Complete redesign of company website with modern UI/UX\",\n  \"start_date\": \"2024-02-01\",\n  \"end_date\": \"2024-05-01\",\n  \"assigned_employees\": [{{employee_id}}]\n}"
+                              },
+                              "url": {
+                                   "raw": "{{base_url}}/api/v1/projects/",
+                                   "host": [
+                                        "{{base_url}}"
+                                   ],
+                                   "path": [
+                                        "api",
+                                        "v1",
+                                        "projects",
+                                        ""
+                                   ]
+                              },
+                              "description": "Create a new project. Requires Admin or Manager role."
+                         },
+                         "response": []
+                    },
+                    {
+                         "name": "Get Project Details",
+                         "request": {
+                              "method": "GET",
+                              "header": [
+                                   {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}",
+                                        "type": "text"
+                                   }
+                              ],
+                              "url": {
+                                   "raw": "{{base_url}}/api/v1/projects/{{project_id}}/",
+                                   "host": [
+                                        "{{base_url}}"
+                                   ],
+                                   "path": [
+                                        "api",
+                                        "v1",
+                                        "projects",
+                                        "{{project_id}}",
+                                        ""
+                                   ]
+                              },
+                              "description": "Retrieve details of a specific project."
+                         },
+                         "response": []
+                    },
+                    {
+                         "name": "Update Project",
+                         "request": {
+                              "method": "PATCH",
+                              "header": [
+                                   {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}",
+                                        "type": "text"
+                                   },
+                                   {
+                                        "key": "Content-Type",
+                                        "value": "application/json",
+                                        "type": "text"
+                                   }
+                              ],
+                              "body": {
+                                   "mode": "raw",
+                                   "raw": "{\n  \"name\": \"Updated Project Name\",\n  \"description\": \"Updated project description\",\n  \"end_date\": \"2024-06-01\"\n}"
+                              },
+                              "url": {
+                                   "raw": "{{base_url}}/api/v1/projects/{{project_id}}/",
+                                   "host": [
+                                        "{{base_url}}"
+                                   ],
+                                   "path": [
+                                        "api",
+                                        "v1",
+                                        "projects",
+                                        "{{project_id}}",
+                                        ""
+                                   ]
+                              },
+                              "description": "Update project information. Requires Admin or Manager role."
+                         },
+                         "response": []
+                    },
+                    {
+                         "name": "Delete Project",
+                         "request": {
+                              "method": "DELETE",
+                              "header": [
+                                   {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}",
+                                        "type": "text"
+                                   }
+                              ],
+                              "url": {
+                                   "raw": "{{base_url}}/api/v1/projects/{{project_id}}/",
+                                   "host": [
+                                        "{{base_url}}"
+                                   ],
+                                   "path": [
+                                        "api",
+                                        "v1",
+                                        "projects",
+                                        "{{project_id}}",
+                                        ""
+                                   ]
+                              },
+                              "description": "Delete a project. Requires Admin or Manager role."
+                         },
+                         "response": []
+                    }
+               ],
+               "description": "Project management endpoints. Admin and Manager users can create, update, and delete projects."
+          },
+          {
+               "name": "Performance Reviews",
+               "item": [
+                    {
+                         "name": "List Performance Reviews",
+                         "request": {
+                              "method": "GET",
+                              "header": [
+                                   {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}",
+                                        "type": "text"
+                                   }
+                              ],
+                              "url": {
+                                   "raw": "{{base_url}}/api/v1/performance-reviews/",
+                                   "host": [
+                                        "{{base_url}}"
+                                   ],
+                                   "path": [
+                                        "api",
+                                        "v1",
+                                        "performance-reviews",
+                                        ""
+                                   ],
+                                   "query": [
+                                        {
+                                             "key": "employee",
+                                             "value": "{{employee_id}}",
+                                             "description": "Filter by employee ID",
+                                             "disabled": true
+                                        },
+                                        {
+                                             "key": "stage",
+                                             "value": "",
+                                             "description": "Filter by review stage",
+                                             "disabled": true
+                                        },
+                                        {
+                                             "key": "reviewer",
+                                             "value": "{{reviewer_id}}",
+                                             "description": "Filter by reviewer ID",
+                                             "disabled": true
+                                        },
+                                        {
+                                             "key": "search",
+                                             "value": "",
+                                             "description": "Search by employee name, feedback, notes",
+                                             "disabled": true
+                                        },
+                                        {
+                                             "key": "ordering",
+                                             "value": "-created_at",
+                                             "description": "Order by: created_at, review_date, stage",
+                                             "disabled": true
+                                        }
+                                   ]
+                              },
+                              "description": "Retrieve a list of performance reviews. Access is filtered by user role."
+                         },
+                         "response": []
+                    },
+                    {
+                         "name": "Create Performance Review",
+                         "request": {
+                              "method": "POST",
+                              "header": [
+                                   {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}",
+                                        "type": "text"
+                                   },
+                                   {
+                                        "key": "Content-Type",
+                                        "value": "application/json",
+                                        "type": "text"
+                                   }
+                              ],
+                              "body": {
+                                   "mode": "raw",
+                                   "raw": "{\n  \"employee\": {{employee_id}},\n  \"reviewer\": {{reviewer_id}},\n  \"stage\": \"pending_review\",\n  \"review_date\": \"2024-03-15\",\n  \"rating\": 4,\n  \"feedback\": \"Excellent performance throughout the review period. Shows strong technical skills and good teamwork.\",\n  \"notes\": \"Consider for promotion in next cycle.\"\n}"
+                              },
+                              "url": {
+                                   "raw": "{{base_url}}/api/v1/performance-reviews/",
+                                   "host": [
+                                        "{{base_url}}"
+                                   ],
+                                   "path": [
+                                        "api",
+                                        "v1",
+                                        "performance-reviews",
+                                        ""
+                                   ]
+                              },
+                              "description": "Create a new performance review. Requires Admin or Manager role."
+                         },
+                         "response": []
+                    },
+                    {
+                         "name": "Get Performance Review Details",
+                         "request": {
+                              "method": "GET",
+                              "header": [
+                                   {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}",
+                                        "type": "text"
+                                   }
+                              ],
+                              "url": {
+                                   "raw": "{{base_url}}/api/v1/performance-reviews/{{review_id}}/",
+                                   "host": [
+                                        "{{base_url}}"
+                                   ],
+                                   "path": [
+                                        "api",
+                                        "v1",
+                                        "performance-reviews",
+                                        "{{review_id}}",
+                                        ""
+                                   ]
+                              },
+                              "description": "Retrieve details of a specific performance review."
+                         },
+                         "response": []
+                    },
+                    {
+                         "name": "Update Performance Review",
+                         "request": {
+                              "method": "PATCH",
+                              "header": [
+                                   {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}",
+                                        "type": "text"
+                                   },
+                                   {
+                                        "key": "Content-Type",
+                                        "value": "application/json",
+                                        "type": "text"
+                                   }
+                              ],
+                              "body": {
+                                   "mode": "raw",
+                                   "raw": "{\n  \"feedback\": \"Updated feedback with additional observations\",\n  \"rating\": 5,\n  \"notes\": \"Updated notes for the review\"\n}"
+                              },
+                              "url": {
+                                   "raw": "{{base_url}}/api/v1/performance-reviews/{{review_id}}/",
+                                   "host": [
+                                        "{{base_url}}"
+                                   ],
+                                   "path": [
+                                        "api",
+                                        "v1",
+                                        "performance-reviews",
+                                        "{{review_id}}",
+                                        ""
+                                   ]
+                              },
+                              "description": "Update performance review information. Requires Admin or Manager role."
+                         },
+                         "response": []
+                    },
+                    {
+                         "name": "Delete Performance Review",
+                         "request": {
+                              "method": "DELETE",
+                              "header": [
+                                   {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}",
+                                        "type": "text"
+                                   }
+                              ],
+                              "url": {
+                                   "raw": "{{base_url}}/api/v1/performance-reviews/{{review_id}}/",
+                                   "host": [
+                                        "{{base_url}}"
+                                   ],
+                                   "path": [
+                                        "api",
+                                        "v1",
+                                        "performance-reviews",
+                                        "{{review_id}}",
+                                        ""
+                                   ]
+                              },
+                              "description": "Delete a performance review. Requires Admin or Manager role."
+                         },
+                         "response": []
+                    },
+                    {
+                         "name": "Transition Performance Review Stage",
+                         "request": {
+                              "method": "POST",
+                              "header": [
+                                   {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}",
+                                        "type": "text"
+                                   },
+                                   {
+                                        "key": "Content-Type",
+                                        "value": "application/json",
+                                        "type": "text"
+                                   }
+                              ],
+                              "body": {
+                                   "mode": "raw",
+                                   "raw": "{\n  \"new_stage\": \"review_scheduled\"\n}"
+                              },
+                              "url": {
+                                   "raw": "{{base_url}}/api/v1/performance-reviews/{{review_id}}/transition/",
+                                   "host": [
+                                        "{{base_url}}"
+                                   ],
+                                   "path": [
+                                        "api",
+                                        "v1",
+                                        "performance-reviews",
+                                        "{{review_id}}",
+                                        "transition",
+                                        ""
+                                   ]
+                              },
+                              "description": "Transition performance review to next stage. Only valid transitions are allowed."
+                         },
+                         "response": []
+                    }
+               ],
+               "description": "Performance review management endpoints with workflow state transitions. Admin and Manager users can manage reviews."
+          }
+     ],
+     "event": [
+          {
+               "listen": "prerequest",
+               "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                         "// Set default values for variables if not already set",
+                         "if (!pm.environment.get('base_url')) {",
+                         "    pm.environment.set('base_url', 'http://localhost:8000');",
+                         "}",
+                         "",
+                         "// Log the request being made",
+                         "console.log('Making request to: ' + pm.request.url);"
+                    ]
+               }
+          },
+          {
+               "listen": "test",
+               "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                         "// Basic response validation",
+                         "pm.test('Status code is valid', function () {",
+                         "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204, 400, 401, 403, 404]);",
+                         "});",
+                         "",
+                         "pm.test('Response time is acceptable', function () {",
+                         "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                         "});",
+                         "",
+                         "// Log response details",
+                         "console.log('Response Status: ' + pm.response.status);",
+                         "console.log('Response Time: ' + pm.response.responseTime + 'ms');",
+                         "",
+                         "// If response is JSON, validate structure",
+                         "if (pm.response.headers.get('Content-Type') && pm.response.headers.get('Content-Type').includes('application/json')) {",
+                         "    try {",
+                         "        const responseJson = pm.response.json();",
+                         "        console.log('Response Body:', JSON.stringify(responseJson, null, 2));",
+                         "    } catch (e) {",
+                         "        console.log('Could not parse response as JSON');",
+                         "    }",
+                         "}"
+                    ]
+               }
+          }
+     ],
+     "variable": [
+          {
+               "key": "base_url",
+               "value": "http://localhost:8000",
+               "type": "string",
+               "description": "Base URL for the API server"
+          },
+          {
+               "key": "access_token",
+               "value": "your_jwt_access_token_here",
+               "type": "string",
+               "description": "JWT access token for authentication"
+          },
+          {
+               "key": "company_id",
+               "value": "1",
+               "type": "string",
+               "description": "ID of a company for testing"
+          },
+          {
+               "key": "department_id",
+               "value": "1",
+               "type": "string",
+               "description": "ID of a department for testing"
+          },
+          {
+               "key": "employee_id",
+               "value": "1",
+               "type": "string",
+               "description": "ID of an employee for testing"
+          },
+          {
+               "key": "project_id",
+               "value": "1",
+               "type": "string",
+               "description": "ID of a project for testing"
+          },
+          {
+               "key": "review_id",
+               "value": "1",
+               "type": "string",
+               "description": "ID of a performance review for testing"
+          },
+          {
+               "key": "user_id",
+               "value": "1",
+               "type": "string",
+               "description": "ID of a user for testing"
+          },
+          {
+               "key": "reviewer_id",
+               "value": "2",
+               "type": "string",
+               "description": "ID of a reviewer for testing"
+          }
+     ]
+}
