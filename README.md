@@ -11,6 +11,7 @@
 ## 📋 Table of Contents
 
 - [Overview](#-overview)
+- [Database Schema](#-database-schema)
 - [Features](#-features)
 - [Architecture](#-architecture)
 - [Quick Start](#-quick-start)
@@ -31,6 +32,10 @@ Talentum API is a comprehensive Django-based solution designed to streamline org
 - **Role-Based Access Control**: Secure, granular permissions system
 
 Built with enterprise-grade security and scalability in mind, the system provides a robust foundation for modern business operations.
+
+
+## 🗂️ Database Schema
+![Database schema](./database-schema.png)
 
 ## ✨ Features
 
