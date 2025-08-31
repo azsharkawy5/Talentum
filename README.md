@@ -35,6 +35,7 @@ Built with enterprise-grade security and scalability in mind, the system provide
 
 
 ## 🗂️ Database Schema
+
 ![Database schema](./database-schema.png)
 
 ## ✨ Features
