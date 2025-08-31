@@ -260,10 +260,7 @@ CMS/
 │   ├── accounts/          # User authentication & management
 │   └── companies/         # Core business logic
 ├── Talentum/              # Django project settings
-├── migrations/            # Database migrations
-├── tests/                 # Test suites
-├── docs/                  # Documentation
-└── requirements/          # Dependencies
+└── docs/                  # Documentation
 ```
 
 ### Code Style
