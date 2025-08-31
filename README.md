@@ -392,5 +392,3 @@ For support and questions:
 ---
 
 **Built with ❤️ by [Ahmad Zakaria](https://github.com/azsharkawy5)**
-
-*Last updated: January 2025*
